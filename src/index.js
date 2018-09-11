@@ -6,12 +6,22 @@ import "./styles.css";
 class Clock extends React.Component {
   constructor(props) {
     super(props);
-    this.date = new Date();
+    this.state = {changed:false}; 
+    this.date = new Date(); 
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.timer=setInterval(() => this.tick(),1000);
+  }
+    
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
 
-  componentWillUnmount() {}
+  tick(){
+    this.setState({ changed:true}); //setState...react knows that the state has changed
+    this.date=new Date(); 
+  }
 
   render() {
     return (
