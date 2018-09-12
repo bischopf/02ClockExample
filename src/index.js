@@ -1,3 +1,5 @@
+"use stict";
+
 import React from "react";
 import ReactDOM from "react-dom";
 
@@ -6,27 +8,27 @@ import "./styles.css";
 class Clock extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {changed:false}; 
-    this.date = new Date(); 
+    this.state = { date: new Date() };
   }
 
   componentDidMount() {
-    this.timer=setInterval(() => this.tick(),1000);
+    console.log("componentDidMount() called");
+    this.timer = setInterval(() => this.tick(), 1000);
   }
-    
+
   componentWillUnmount() {
+    console.log("componentDidUnmount() called");
     clearInterval(this.timer);
   }
 
-  tick(){
-    this.setState({ changed:true}); //setState...react knows that the state has changed
-    this.date=new Date(); 
+  tick() {
+    this.setState({ date: new Date() });
   }
 
   render() {
     return (
-      <div class="alert alert-info" role="alert">
-        <h2>Current Time: {this.date.toLocaleTimeString()}</h2>
+      <div className="alert alert-info" role="alert">
+        <h2>Current Time: {this.state.date.toLocaleTimeString()}</h2>
       </div>
     );
   }
